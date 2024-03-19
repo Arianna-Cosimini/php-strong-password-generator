@@ -1,63 +1,55 @@
 <?php
 
-$userChoice =isset($_GET['userChoice']);
+$userChoice = isset($_GET['userChoice']) ? $_GET['userChoice'] : null;
 
-echo $userChoice;
+$password = '';
 
-
-function getGeneratePassword($userChoice){
+function getGeneratePassword($length)
+{
     $randomPassword = 'abcdefghilmnopqrstuvzABCDEFGHILMNOPQRSTUVZ123456789./!*_';
+    $password = '';
+    $passwordLength = strlen($randomPassword) - 1;
+    for ($i = 0; $i < $length; $i++) {
+        $password .= $randomPassword[rand(0, $passwordLength)];
+    }
+    return $password;
+}
 
-};
+if ($userChoice) {
+    $password = getGeneratePassword($userChoice);
+}
 
 ?>
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="it">
 
 <head>
     <meta charset="UTF-8">
-
-
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-
-    <title>Generate password</title>
+    <title>Generatore di Password</title>
 </head>
 
 <body>
 
-<div class="container p-5">
+    <div class="container p-5">
+        <form action="index.php" method="GET">
+            <div class="mb-3">
+                <label for="userChoice" class="form-label">Inserisci il numero per poter generare la tua password</label>
+                <input type="number" class="form-control" id="userChoice" name="userChoice" aria-describedby="number" min="6" max="12">
+                <div id="numberChoice" class="form-text">Inserisci un numero da 6 a 12.</div>
+            </div>
+            <button type="submit" class="btn btn-primary">Invia</button>
+        </form>
 
-    <form action="index.php" method="GET">
-        <div class="mb-3">
-            <label for="userChoice" class="form-label">Inserisci il numero per poter generare la tua password</label>
-            <input type="number" class="form-control" id="userChoice" name="userChoice" aria-describedby="number" min="6" max="12">
-            <div id="numberChoice" class="form-text">Inserisci un numero da 6 a 12.</div>
-        </div>
-        <button type="submit" class="btn btn-primary">Invia</button>
-    </form>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        
+            <div class="mt-3">
+                <label for="generatedPassword" class="form-label">Password generata:</label>
+                <input type="text" class="form-control" id="generatedPassword" value="<?php echo $password; ?>">
+            </div>
+    
+    </div>
 
 </body>
 
