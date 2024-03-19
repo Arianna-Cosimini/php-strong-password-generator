@@ -1,11 +1,14 @@
 <?php
 
+$userChoice =isset($_GET['userChoice']);
+
+echo $userChoice;
 
 
+function getGeneratePassword($userChoice){
+    $randomPassword = 'abcdefghilmnopqrstuvzABCDEFGHILMNOPQRSTUVZ123456789./!*_';
 
-
-
-
+};
 
 ?>
 
@@ -34,13 +37,13 @@
 
 <div class="container p-5">
 
-    <form>
+    <form action="index.php" method="GET">
         <div class="mb-3">
             <label for="userChoice" class="form-label">Inserisci il numero per poter generare la tua password</label>
             <input type="number" class="form-control" id="userChoice" name="userChoice" aria-describedby="number" min="6" max="12">
-            <div id="emailHelp" class="form-text">Inserisci un numero da 6 a 12.</div>
+            <div id="numberChoice" class="form-text">Inserisci un numero da 6 a 12.</div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Invia</button>
     </form>
 </div>
 
